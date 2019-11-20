@@ -21,7 +21,13 @@ class ButtonScreen extends Component {
   }
 
   render() {
-    const render = this.calculateButtons();
+    const screenStyle = {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center"
+    };
+    const render = <div style={screenStyle}>{this.calculateButtons()};</div>;
     return render;
   }
 }
