@@ -17,10 +17,8 @@ class VideoComponent extends Component {
   }
 
   handleNewVideo() {
-    const nextVideoIndex = this.state.currentVideoIndex++;
-    this.setState({
-      videoIndex: nextVideoIndex //DARK MAGIC DO NOT TOUCH
-    });
+    this.state.currentVideoIndex++;
+    this.setState({});
   }
 
   render() {
