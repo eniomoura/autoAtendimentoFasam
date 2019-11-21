@@ -3,33 +3,43 @@ import "./css/cvideo.css";
 import { Player } from "video-react";
 
 class VideoComponent extends Component {
-  getVideo() {
+  constructor(props) {
+    super(props);
+    this.player = React.createRef();
+    this.state = {
+      currentVideoIndex: 0
+    };
+  }
+
+  getVideo(index) {
     const videos = require("../assets/videos.json");
-    return videos[~~(videos.length * Math.random())];
+    return videos[index % videos.length];
   }
 
   handleNewVideo() {
-    window.location.reload();
+    const nextVideoIndex = this.state.currentVideoIndex++;
+    this.setState({
+      videoIndex: nextVideoIndex //DARK MAGIC DO NOT TOUCH
+    });
   }
 
   render() {
     const videoStyle = {
       boxSizing: "border-box",
       margin: "2%",
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center"
+      float: "right"
     };
 
     const render = (
       <div style={videoStyle}>
         <Player
-          src={this.getVideo()}
+          ref={this.player}
+          src={this.getVideo(this.state.currentVideoIndex)}
           autoPlay
           muted
           fluid={false}
-          height={window.innerHeight * 0.7}
+          height={window.innerHeight * 0.5}
+          width={window.innerWidth * 0.5}
           onEnded={() => this.handleNewVideo()}
         />
       </div>

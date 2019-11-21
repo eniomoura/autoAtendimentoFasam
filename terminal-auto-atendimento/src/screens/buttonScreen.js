@@ -3,10 +3,7 @@ import CustomButton from "../components/cbutton";
 
 class ButtonScreen extends Component {
   calculateButtons() {
-    const buttons = {
-      text: ["Verificar Nota", "Verificar Data de Avaliação", "Voltar"],
-      url: ["http://google.com/", "http://facebook.com/", "http://youtube.com/"]
-    };
+    const buttons = require("..//assets/buttons.json");
     let buttonComps = [];
 
     for (let i = 0; i < buttons.text.length; i++) {
@@ -23,11 +20,14 @@ class ButtonScreen extends Component {
   render() {
     const screenStyle = {
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      marginTop: "3%",
+      marginLeft: "10%",
+      float: "left"
     };
-    const render = <div style={screenStyle}>{this.calculateButtons()};</div>;
+    const render = <div style={screenStyle}>{this.calculateButtons()}</div>;
     return render;
   }
 }

@@ -3,15 +3,16 @@ import React, { Component } from "react";
 class CustomButton extends Component {
   render() {
     const buttonStyle = {
-      boxSizing: "border-box",
       color: "white",
-      backgroundColor: "green",
-      padding: "2%",
-      width: "20%",
+      backgroundColor: "#26447f",
+      width: "100%",
+      padding: "5%",
       textDecoration: "none",
-      borderRadius: "20%",
-      margin: "2%",
-      textAlign: "center"
+      borderRadius: "10%",
+      border: "2px solid white",
+      margin: "5%",
+      textAlign: "center",
+      fontSize: "calc(10px + 2vmin)"
     };
 
     const render = (
