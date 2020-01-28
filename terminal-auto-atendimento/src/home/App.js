@@ -13,6 +13,7 @@ function App() {
   return (
     <div style={homeStyle}>
       <img
+        alt='logo-fasam'
         style={{ margin: "20px" }}
         src={"https://fasam.edu.br/wp-content/uploads/2016/05/fasam-logo.png"}
       ></img>

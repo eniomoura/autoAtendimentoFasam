@@ -1,15 +1,10 @@
 {
   "text": [
-    "Verificar Nota",
-    "Verificar Data de Avaliação",
-    "Verificar Mensalidades",
-    "Fazer Matrícula",
-    "Voltar"
+    "Entrar",
+    "Teste"
   ],
   "url": [
-    "http://google.com/",
-    "http://facebook.com/",
-    "http://youtube.com/",
-    "http://reddit.com/"
+    "http://faculdadefasam.com.br/validaAluno.asp",
+    "http://youtube.com"
   ]
 }

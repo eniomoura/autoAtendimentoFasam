@@ -16,7 +16,7 @@ class CustomButton extends Component {
     };
 
     const render = (
-      <a style={buttonStyle} href={this.props.url}>
+      <a {...this.props} style={buttonStyle} href={this.props.url}>
         {this.props.text}
       </a>
     );
