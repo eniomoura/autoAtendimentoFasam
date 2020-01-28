@@ -5,7 +5,6 @@ import { Player } from "video-react";
 class VideoComponent extends Component {
   constructor(props) {
     super(props);
-    this.player = React.createRef();
     this.state = {
       currentVideoIndex: 0
     };
@@ -17,26 +16,34 @@ class VideoComponent extends Component {
   }
 
   handleNewVideo() {
-    this.state.currentVideoIndex++;
-    this.setState({});
+    let newIndex = this.state.currentVideoIndex + 1;
+    this.setState({ currentVideoIndex: newIndex });
+    this.refs.player.play();
   }
 
   render() {
-    const videoStyle = {
-      boxSizing: "border-box",
-      margin: "2%",
-      float: "right"
-    };
+    let videoStyle = null
+    if (this.props.fullscreen) {
+      videoStyle = {
+        boxSizing: "border-box",
+      };
+    } else {
+      videoStyle = {
+        boxSizing: "border-box",
+        margin: "2%",
+        float: "right"
+      };
+    }
 
     const render = (
       <div style={videoStyle}>
         <Player
-          ref={this.player}
+          ref="player"
           src={this.getVideo(this.state.currentVideoIndex)}
           autoPlay
           fluid={false}
-          height={window.innerHeight * 0.5}
-          width={window.innerWidth * 0.5}
+          height={this.props.fullscreen?window.innerHeight:window.innerHeight * 0.5}
+          width={this.props.fullscreen?window.innerWidth:window.innerWidth * 0.5}
           onEnded={() => this.handleNewVideo()}
         />
       </div>

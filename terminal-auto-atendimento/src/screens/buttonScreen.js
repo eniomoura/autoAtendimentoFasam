@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Dialog, DialogContent, TextField, Button } from "@material-ui/core";
 import CustomButton from "../components/cbutton";
 
