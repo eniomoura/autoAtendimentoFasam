@@ -34,7 +34,6 @@ class VideoComponent extends Component {
           ref={this.player}
           src={this.getVideo(this.state.currentVideoIndex)}
           autoPlay
-          muted
           fluid={false}
           height={window.innerHeight * 0.5}
           width={window.innerWidth * 0.5}
