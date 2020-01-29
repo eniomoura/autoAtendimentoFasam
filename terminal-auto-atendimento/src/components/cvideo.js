@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./css/cvideo.css";
-import { Player } from "video-react";
 
 class VideoComponent extends Component {
   constructor(props) {
@@ -22,10 +21,10 @@ class VideoComponent extends Component {
   }
 
   render() {
-    let videoStyle = null
+    let videoStyle = null;
     if (this.props.fullscreen) {
       videoStyle = {
-        boxSizing: "border-box",
+        boxSizing: "border-box"
       };
     } else {
       videoStyle = {
@@ -37,15 +36,22 @@ class VideoComponent extends Component {
 
     const render = (
       <div style={videoStyle}>
-        <Player
+        <video
           ref="player"
-          src={this.getVideo(this.state.currentVideoIndex)}
           autoPlay
-          fluid={false}
-          height={this.props.fullscreen?window.innerHeight:window.innerHeight * 0.5}
-          width={this.props.fullscreen?window.innerWidth:window.innerWidth * 0.5}
+          muted
+          height={
+            this.props.fullscreen
+              ? window.innerHeight
+              : window.innerHeight * 0.5
+          }
+          width={
+            this.props.fullscreen ? window.innerWidth : window.innerWidth * 0.5
+          }
           onEnded={() => this.handleNewVideo()}
-        />
+        >
+          <source src={this.getVideo(this.state.currentVideoIndex)} />
+        </video>
       </div>
     );
     return render;
