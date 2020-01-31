@@ -5,7 +5,7 @@ import CustomButton from "../components/cbutton";
 import "react-simple-keyboard/build/css/index.css";
 export default function ButtonScreen(props) {
   const [open, setOpen] = React.useState(false);
-  const [focused, setFocus] = React.useState("");
+  const [stage, setStage] = React.useState(0);
   const [form, setForm] = React.useState({
     matricula: "",
     codigo: ""
@@ -18,18 +18,29 @@ export default function ButtonScreen(props) {
   };
 
   const onChangeKeyboard = keyPress => {
-    console.log(focused);
-    setForm({
-      ...form,
-      [focused]: keyPress
-    });
+    if (stage === 0) {
+      console.log(stage);
+      setForm({
+        ...form,
+        matricula: keyPress
+      });
+    } else if (stage === 1) {
+      setForm({
+        ...form,
+        codigo: keyPress
+      });
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    window.location.assign(
-      `${buttons.url[0]}?key01lg=${form.matricula}&key02cs=${form.codigo}&key03ps=99999999&oldId=mdl`
-    );
+    if (stage === 0) {
+      setStage(1);
+    } else if (stage === 1) {
+      window.location.assign(
+        `${buttons.url[0]}?key01lg=${form.matricula}&key02cs=${form.codigo}&key03ps=99999999&oldId=mdl`
+      );
+    }
   };
 
   const handleClose = () => {
@@ -69,61 +80,58 @@ export default function ButtonScreen(props) {
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth='xl' fullWidth>
         <DialogContent>
-          <TextField
-            type="number"
-            inputProps={{ min: "0" }}
-            name="matricula"
-            autoFocus
-            margin="dense"
-            label="Matrícula"
-            fullWidth
-            value={form.matricula}
-            onChange={handleChange}
-            onClick={() => {
-              setFocus("matricula");
-            }}
-            onBlur={() => {
-              setTimeout(() => {
-                setFocus("matricula");
-              }, 10);
-            }}
-          />
-          <TextField
-            type="number"
-            inputProps={{ min: "0" }}
-            name="codigo"
-            margin="dense"
-            label="Código"
-            fullWidth
-            value={form.codigo}
-            onChange={handleChange}
-            onClick={() => {
-              setFocus("codigo");
-            }}
-            onBlur={() => {
-              console.log("cod");
-              setTimeout(() => {
-                setFocus("codigo");
-              }, 10);
-            }}
-          />
+          {stage === 0 && (
+            <>
+              <TextField
+                type="number"
+                inputProps={{ min: "0", style:{fontSize: 50}}}
+                name="matricula"
+                margin="dense"
+                label="Matrícula"
+                fullWidth
+                value={form.matricula}
+                onChange={handleChange}
+              />
+              <Keyboard
+                layout={{
+                  default: ["1 2 3 4 5 6 7 8 9 0 {bksp}"]
+                }}
+                onChange={keyPress => onChangeKeyboard(keyPress)}
+              ></Keyboard>
+            </>
+          )}
+          {stage === 1 && (
+            <>
+              <TextField
+                type="number"
+                inputProps={{ min: "0", style:{fontSize: 50}}}
+                name="codigo"
+                margin="dense"
+                label="Código"
+                fullWidth
+                value={form.codigo}
+                onChange={handleChange}
+              />
+              <Keyboard
+                layout={{
+                  default: ["1 2 3 4 5 6 7 8 9 0 {bksp}"]
+                }}
+                onChange={keyPress => onChangeKeyboard(keyPress)}
+              ></Keyboard>
+            </>
+          )}
           <Button
             variant="contained"
             fullWidth
             onClick={handleSubmit}
             color="primary"
+            size='large'
           >
             Entrar
           </Button>
         </DialogContent>
-        <Keyboard
-          layout={{
-            default: ["1 2 3 4 5 6 7 8 9 0 {bksp}"]
-          }}
-          onChange={keyPress => onChangeKeyboard(keyPress)}
-        ></Keyboard>
       </Dialog>
       <div style={screenStyle}>{calculateButtons()}</div>
     </>
