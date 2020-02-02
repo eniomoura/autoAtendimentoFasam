@@ -1,24 +1,17 @@
 import React, { Component } from "react";
+import { Button } from "@material-ui/core";
 
 class CustomButton extends Component {
   render() {
-    const buttonStyle = {
-      color: "white",
-      backgroundColor: "#26447f",
-      width: "100%",
-      padding: "5%",
-      textDecoration: "none",
-      borderRadius: "10%",
-      border: "2px solid white",
-      margin: "5%",
-      textAlign: "center",
-      fontSize: "calc(10px + 2vmin)"
-    };
-
     const render = (
-      <a {...this.props} style={buttonStyle} href={this.props.url}>
+      <Button
+        variant="contained"
+        {...this.props}
+        href={this.props.url}
+        style={{ minWidth: "50vh", minHeight: "10vh" }}
+      >
         {this.props.text}
-      </a>
+      </Button>
     );
     return render;
   }

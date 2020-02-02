@@ -28,7 +28,7 @@ class App extends Component {
               "https://fasam.edu.br/wp-content/uploads/2016/05/fasam-logo.png"
             }
           ></img>
-          <div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
             <ButtonScreen refHome={this}></ButtonScreen>
             <VideoComponent></VideoComponent>
           </div>

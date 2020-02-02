@@ -53,7 +53,6 @@ export default function ButtonScreen(props) {
     alignItems: "center",
     justifyContent: "center",
     marginTop: "3%",
-    marginLeft: "10%",
     float: "left"
   };
 
