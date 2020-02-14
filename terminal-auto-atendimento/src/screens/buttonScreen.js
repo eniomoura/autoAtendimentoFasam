@@ -8,7 +8,7 @@ export default function ButtonScreen(props) {
   const [stage, setStage] = React.useState(0);
   const [form, setForm] = React.useState({
     matricula: "",
-    codigo: ""
+    senha: ""
   });
   const buttons = require("..//assets/buttons.json");
 
@@ -27,7 +27,7 @@ export default function ButtonScreen(props) {
     } else if (stage === 1) {
       setForm({
         ...form,
-        codigo: keyPress
+        senha: keyPress
       });
     }
   };
@@ -38,7 +38,9 @@ export default function ButtonScreen(props) {
       setStage(1);
     } else if (stage === 1) {
       window.location.assign(
-        `${buttons.url[0]}?key01lg=${form.matricula}&key02cs=${form.codigo}&key03ps=99999999&oldId=mdl`
+        `${buttons.url[0]}?key01lg=${form.matricula}&key02cs=${
+          /*AQUI VAI O CODIGO QUANDO A GENTE TIVER*/ ""
+        }&key03ps=${form.senha}&oldId=mdl`
       );
     }
   };
@@ -79,23 +81,22 @@ export default function ButtonScreen(props) {
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose} maxWidth='xl' fullWidth>
+      <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           {stage === 0 && (
             <>
               <TextField
                 type="number"
-                inputProps={{ min: "0", style:{fontSize: 50}}}
+                inputProps={{ min: "0", style: { fontSize: 50 } }}
                 name="matricula"
                 margin="dense"
                 label="Matrícula"
-                fullWidth
                 value={form.matricula}
                 onChange={handleChange}
               />
               <Keyboard
                 layout={{
-                  default: ["1 2 3 4 5 6 7 8 9 0 {bksp}"]
+                  default: ["7 8 9", "4 5 6", "1 2 3", "{bksp} 0 "]
                 }}
                 onChange={keyPress => onChangeKeyboard(keyPress)}
               ></Keyboard>
@@ -105,17 +106,17 @@ export default function ButtonScreen(props) {
             <>
               <TextField
                 type="number"
-                inputProps={{ min: "0", style:{fontSize: 50}}}
-                name="codigo"
+                inputProps={{ min: "0", style: { fontSize: 50 } }}
+                name="senha"
                 margin="dense"
-                label="Código"
+                label="Senha"
                 fullWidth
-                value={form.codigo}
+                value={form.senha}
                 onChange={handleChange}
               />
               <Keyboard
                 layout={{
-                  default: ["1 2 3 4 5 6 7 8 9 0 {bksp}"]
+                  default: ["7 8 9", "4 5 6", "1 2 3", "{bksp} 0 "]
                 }}
                 onChange={keyPress => onChangeKeyboard(keyPress)}
               ></Keyboard>
@@ -126,7 +127,7 @@ export default function ButtonScreen(props) {
             fullWidth
             onClick={handleSubmit}
             color="primary"
-            size='large'
+            size="large"
           >
             Entrar
           </Button>
